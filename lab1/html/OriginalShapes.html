@@ -1,0 +1,324 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>OriginalShapes</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-01-26"><meta name="DC.source" content="OriginalShapes.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Original Shapes</a></li><li><a href="#2">Translation</a></li><li><a href="#3">Vertical Shear</a></li><li><a href="#4">Rotation</a></li><li><a href="#5">Translation Followed by Rotation</a></li><li><a href="#6">Rotation Followed by Translation</a></li></ul></div><h2>Original Shapes<a name="1"></a></h2><p>points on the square; the first point is repeated to close the square when it is plotted</p><pre class="codeinput">Psquare = [1 -1 -1  1 1;
+           1  1 -1 -1 1];
+
+<span class="comment">% points on the circle generated using a vector angles</span>
+<span class="comment">% most functions in Matlab are vectorized (i.e., they will work</span>
+<span class="comment">% for array inputs)</span>
+ang = 0:10:360;
+Pcircle = [cosd(ang) + 5;
+           sind(ang)];
+
+plot(Psquare(1, :), Psquare(2, :), <span class="string">'k'</span>);
+hold <span class="string">on</span>
+plot(Pcircle(1, :), Pcircle(2, :), <span class="string">'k'</span>);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="OriginalShapes_01.png" alt=""> <h2>Translation<a name="2"></a></h2><p>translation vector</p><pre class="codeinput">t = [-3; -3];
+
+<span class="comment">% translated square</span>
+Qsquare = translate2(Psquare, t);
+
+<span class="comment">% translated circle</span>
+Qcircle = translate2(Pcircle, t);
+
+plot(Qsquare(1, :), Qsquare(2, :), <span class="string">'r'</span>);
+plot(Qcircle(1, :), Qcircle(2, :), <span class="string">'r'</span>);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="OriginalShapes_02.png" alt=""> <h2>Vertical Shear<a name="3"></a></h2><pre class="codeinput"><span class="comment">%shear amount</span>
+m = 3;
+
+<span class="comment">%sheared square</span>
+Ssquare = vshear2(Psquare, m);
+
+<span class="comment">%sheared circle</span>
+Scircle = vshear2(Pcircle, m);
+
+<span class="comment">%create new figure</span>
+figure;
+
+<span class="comment">%plot shapes</span>
+plot(Psquare(1, :), Psquare(2, :), <span class="string">'k'</span>);
+hold <span class="string">on</span>
+plot(Pcircle(1, :), Pcircle(2, :), <span class="string">'k'</span>);
+axis <span class="string">equal</span>
+
+plot(Ssquare(1, :), Ssquare(2, :), <span class="string">'r'</span>);
+plot(Scircle(1, :), Scircle(2, :), <span class="string">'r'</span>);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="OriginalShapes_03.png" alt=""> <h2>Rotation<a name="4"></a></h2><pre class="codeinput"><span class="comment">%angle of rotation</span>
+theta = 120;
+
+<span class="comment">%rotated square</span>
+Rsquare = rotate2(Psquare, theta);
+
+<span class="comment">%rotated circle</span>
+Rcircle = rotate2(Pcircle, theta);
+
+<span class="comment">%create new figure</span>
+figure;
+
+<span class="comment">%plot shapes</span>
+plot(Psquare(1, :), Psquare(2, :), <span class="string">'k'</span>);
+hold <span class="string">on</span>
+plot(Pcircle(1, :), Pcircle(2, :), <span class="string">'k'</span>);
+axis <span class="string">equal</span>
+
+plot(Rsquare(1, :), Rsquare(2, :), <span class="string">'r'</span>);
+plot(Rcircle(1, :), Rcircle(2, :), <span class="string">'r'</span>);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="OriginalShapes_04.png" alt=""> <h2>Translation Followed by Rotation<a name="5"></a></h2><pre class="codeinput"><span class="comment">%angle of rotation</span>
+theta = 120;
+
+<span class="comment">%translation vector</span>
+t = [-3; -3];
+
+<span class="comment">%transformation on square</span>
+Bsquare = translate2(Psquare, t);
+Csquare = rotate2(Bsquare, theta);
+
+<span class="comment">%transformation on circle</span>
+Bcircle = translate2(Pcircle, t);
+Ccircle = rotate2(Bcircle, theta);
+
+<span class="comment">%create new figure</span>
+figure;
+
+<span class="comment">%plot shapes</span>
+plot(Psquare(1, :), Psquare(2, :), <span class="string">'k'</span>);
+hold <span class="string">on</span>
+plot(Pcircle(1, :), Pcircle(2, :), <span class="string">'k'</span>);
+axis <span class="string">equal</span>
+
+plot(Csquare(1, :), Csquare(2, :), <span class="string">'r'</span>);
+plot(Ccircle(1, :), Ccircle(2, :), <span class="string">'r'</span>);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="OriginalShapes_05.png" alt=""> <h2>Rotation Followed by Translation<a name="6"></a></h2><pre class="codeinput"><span class="comment">%angle of rotation</span>
+theta = 120;
+
+<span class="comment">%translation vector</span>
+t = [-3; -3];
+
+<span class="comment">%transformation on square</span>
+Fsquare = rotate2(Psquare, theta);
+Gsquare = translate2(Fsquare, t);
+
+<span class="comment">%transformation on circle</span>
+Fcircle = rotate2(Pcircle, theta);
+Gcircle = translate2(Fcircle, t);
+
+<span class="comment">%create new figure</span>
+figure;
+
+<span class="comment">%plot shapes</span>
+plot(Psquare(1, :), Psquare(2, :), <span class="string">'k'</span>);
+hold <span class="string">on</span>
+plot(Pcircle(1, :), Pcircle(2, :), <span class="string">'k'</span>);
+axis <span class="string">equal</span>
+
+plot(Gsquare(1, :), Gsquare(2, :), <span class="string">'r'</span>);
+plot(Gcircle(1, :), Gcircle(2, :), <span class="string">'r'</span>);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="OriginalShapes_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Original Shapes
+% points on the square; the first point is repeated to close the
+% square when it is plotted
+Psquare = [1 -1 -1  1 1;
+           1  1 -1 -1 1];
+
+% points on the circle generated using a vector angles
+% most functions in Matlab are vectorized (i.e., they will work
+% for array inputs)
+ang = 0:10:360;
+Pcircle = [cosd(ang) + 5;
+           sind(ang)];
+
+plot(Psquare(1, :), Psquare(2, :), 'k');
+hold on
+plot(Pcircle(1, :), Pcircle(2, :), 'k');
+axis equal
+
+%% Translation
+% translation vector
+t = [-3; -3];
+
+% translated square
+Qsquare = translate2(Psquare, t);
+
+% translated circle
+Qcircle = translate2(Pcircle, t);
+
+plot(Qsquare(1, :), Qsquare(2, :), 'r');
+plot(Qcircle(1, :), Qcircle(2, :), 'r');
+axis equal
+
+%% Vertical Shear
+%shear amount
+m = 3;
+
+%sheared square
+Ssquare = vshear2(Psquare, m);
+
+%sheared circle
+Scircle = vshear2(Pcircle, m);
+
+%create new figure
+figure;
+
+%plot shapes
+plot(Psquare(1, :), Psquare(2, :), 'k');
+hold on
+plot(Pcircle(1, :), Pcircle(2, :), 'k');
+axis equal
+
+plot(Ssquare(1, :), Ssquare(2, :), 'r');
+plot(Scircle(1, :), Scircle(2, :), 'r');
+axis equal
+
+%% Rotation
+%angle of rotation
+theta = 120;
+
+%rotated square
+Rsquare = rotate2(Psquare, theta);
+
+%rotated circle
+Rcircle = rotate2(Pcircle, theta);
+
+%create new figure
+figure;
+
+%plot shapes
+plot(Psquare(1, :), Psquare(2, :), 'k');
+hold on
+plot(Pcircle(1, :), Pcircle(2, :), 'k');
+axis equal
+
+plot(Rsquare(1, :), Rsquare(2, :), 'r');
+plot(Rcircle(1, :), Rcircle(2, :), 'r');
+axis equal
+
+%% Translation Followed by Rotation
+%angle of rotation
+theta = 120;
+
+%translation vector
+t = [-3; -3];
+
+%transformation on square
+Bsquare = translate2(Psquare, t);
+Csquare = rotate2(Bsquare, theta);
+
+%transformation on circle
+Bcircle = translate2(Pcircle, t);
+Ccircle = rotate2(Bcircle, theta);
+
+%create new figure
+figure;
+
+%plot shapes
+plot(Psquare(1, :), Psquare(2, :), 'k');
+hold on
+plot(Pcircle(1, :), Pcircle(2, :), 'k');
+axis equal
+
+plot(Csquare(1, :), Csquare(2, :), 'r');
+plot(Ccircle(1, :), Ccircle(2, :), 'r');
+axis equal
+
+%% Rotation Followed by Translation
+%angle of rotation
+theta = 120;
+
+%translation vector
+t = [-3; -3];
+
+%transformation on square
+Fsquare = rotate2(Psquare, theta);
+Gsquare = translate2(Fsquare, t);
+
+%transformation on circle
+Fcircle = rotate2(Pcircle, theta);
+Gcircle = translate2(Fcircle, t);
+
+%create new figure
+figure;
+
+%plot shapes
+plot(Psquare(1, :), Psquare(2, :), 'k');
+hold on
+plot(Pcircle(1, :), Pcircle(2, :), 'k');
+axis equal
+
+plot(Gsquare(1, :), Gsquare(2, :), 'r');
+plot(Gcircle(1, :), Gcircle(2, :), 'r');
+axis equal
+##### SOURCE END #####
+--></body></html>

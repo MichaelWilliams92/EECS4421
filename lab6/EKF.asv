@@ -1,0 +1,51 @@
+%% Lab 6 Question, part B
+% The following is a Matlab function that simulates the actual EKF using
+% specifications provided in the Lab6 manual. In this EKF, the plant model
+% is assumed linear.  
+%
+% Parts A and C are answered below
+%
+% A)What is the matrix Ht obtained after linearizing the measurement model?
+% Answer: The matrix is fully described below, as the variable H
+%
+% C)
+
+function [updatedMu, updatedCov] = EKF(state, covariance, ctrl, z)
+% EFK simulates the extended kalman filter and returns the updated state
+% and covariance, given the state
+
+% extended kalman filter that takes in a plant model, covariance, control
+% input and a measurement model.
+
+
+
+
+
+A = eye(2);
+B = eye(2);
+I = eye(2);
+
+H = [((2*state(1) - 10)/(2*((state(1) - 5)^2 + state(2)^2)^(1/2))) (state(2)/((state(1) - 5)^2 + state(2)^2)^(1/2)); %Jacobian matrix H
+     ((2*state(1) - 20)/(2*((state(1) - 10)^2 + state(2)^2)^(1/2))) (state(2)/((state(1) - 10)^2 + state(2)^2)^(1/2))];
+
+R = [0.25^2 0; %Covariance R
+    0 0.25^2];
+
+Q = [0.25^2 0; %Covariance Q
+    0 0.25^2];
+
+% prediction
+predMut = A * state + B * ctrl + Q * randn(2,1); %predicted mu
+predCoV = A * covariance * (A') + R; %predicted Covariance
+
+    d1 = sqrt((predMut(1) - 5)^2 + (predMut(2) - 0)^2);
+    d2 = sqrt((predMut(1) - 10)^2 + (predMut(2) - 0)^2);
+    zhat = [d1;d2];
+% correction
+B = predCoV * H';
+S = H * predCoV * H' + Q; 
+K = B / S; %Kalman Gain
+updatedMu = predMut + K * (z - zhat);
+updatedCov = (I - K * H) * predCoV;
+
+end
